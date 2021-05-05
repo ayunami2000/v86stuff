@@ -1,41 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
+<html>
+<head>
 <title>v86stuff</title>
 
 <script src="https://github.com/copy/v86/releases/download/latest/libv86.js"></script>
 <script>
 "use strict";
 
-function loadbruh()
-{
+function loadbruh(){
     var selel=document.querySelector("select"),
-        selval=selel.value;
+        selval=selel.value,
+        iscustom=selval=="CUSTOM";
+    selval=iscustom?prompt("Custom URL:"):selval;
+    if(iscustom&&!selval)return;
+    selval="https://api.allorigins.win/raw?url="+selval;
     selel.outerHTML=document.querySelector("button").outerHTML="";
-    var emulator = window.emulator = new V86Starter({
-        wasm_path: "https://api.allorigins.win/raw?url=https://github.com/copy/v86/releases/download/latest/v86.wasm",
-        memory_size: 32 * 1024 * 1024,
-        vga_memory_size: 2 * 1024 * 1024,
-        screen_container: document.getElementById("screen_container"),
-        bios: {
-            url: "https://github.com/copy/v86/raw/master/bios/seabios.bin",
-        },
-        vga_bios: {
-            url: "https://github.com/copy/v86/raw/master/bios/vgabios.bin",
-        },
-        cdrom: {
-            url: selval,
-        },
-        autostart: true,
+    var emulator=window.emulator=new V86Starter({
+        wasm_path:"https://api.allorigins.win/raw?url=https://github.com/copy/v86/releases/download/latest/v86.wasm",
+        memory_size:192*1024*1024,
+        vga_memory_size:8*1024*1024,
+        screen_container:document.getElementById("screen_container"),
+        bios:{url:"seabios.bin"},
+        vga_bios:{url:"vgabios.bin"},
+        cdrom:{url:selval},
+        autostart:true
     });
 }
 </script>
+</head>
+<body>
 <select>
-    <option name="slax.iso">Slax</option>
-    <option name="tinycore.iso">TinyCore</option>
-    <option name="olive.iso">oLive</option>
-    <option name="tinycore-mc.iso">TinyCore with Minecraft at /mnt/sda1</option>
+    <option name="http://tinycorelinux.net/12.x/x86/release/TinyCore-current.iso">TinyCore (20mb)</option>
+    <option name="http://mirror.slitaz.org/iso/rolling/slitaz-rolling.iso">SliTaz (53mb)</option>
+    <option name="https://master.dl.sourceforge.net/project/archiveos/o/olive/olive-0.2.iso?viasf=1">oLive (109mb)</option>
+    <option name="http://ftp.sh.cvut.cz/slax/Slax-9.x/slax-32bit-9.11.0.iso">Slax (270mb)</option>
+    <option name="https://master.dl.sourceforge.net/project/winlix/WinLix/WINLIX (Second Version).iso?viasf=1">WinLix (327mb)</option>
+    <option name="CUSTOM">Custom URL</option>
 </select>
 <button onclick="loadbruh()">load</button>
 <div id="screen_container">
-    <div style="white-space: pre; font: 14px monospace; line-height: 14px"></div>
+    <div style="white-space:pre;font:14px monospace;line-height:14px"></div>
     <canvas style="display: none"></canvas>
 </div>
+</body>
+</html>
