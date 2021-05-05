@@ -21,6 +21,7 @@ function loadbruh(){
         wasm_path:corsProxy+"https://github.com/copy/v86/releases/download/latest/v86.wasm",
         memory_size:192*1024*1024,
         vga_memory_size:8*1024*1024,
+        network_relay_url:"wss://relay.widgetry.org/",
         screen_container:document.getElementById("screen_container"),
         bios:{url:corsProxy+"https://github.com/copy/v86/raw/master/bios/seabios.bin"},
         vga_bios:{url:corsProxy+"https://github.com/copy/v86/raw/master/bios/vgabios.bin"},
@@ -37,6 +38,7 @@ function loadbruh(){
     <option value="https://master.dl.sourceforge.net/project/archiveos/o/olive/olive-0.2.iso?viasf=1">oLive (109mb)</option>
     <option value="http://ftp.sh.cvut.cz/slax/Slax-9.x/slax-32bit-9.11.0.iso">Slax (270mb)</option>
     <option value="https://master.dl.sourceforge.net/project/winlix/WinLix/WINLIX (Second Version).iso?viasf=1">WinLix (327mb)</option>
+    <option value="http://mirror.math.princeton.edu/pub/archlinux32/archisos/archlinux32-2021.04.06-i686.iso">Arch Linux (631mb)</option>
     <option value="CUSTOM">Custom URL</option>
 </select>
 <button onclick="loadbruh()">load</button>
