@@ -11,7 +11,7 @@ function loadbruh()
         selval=selel.value;
     selel.outerHTML=document.querySelector("button").outerHTML="";
     var emulator = window.emulator = new V86Starter({
-        wasm_path: "https://github.com/copy/v86/releases/download/latest/v86.wasm",
+        wasm_path: "https://api.allorigins.win/raw?url=https://github.com/copy/v86/releases/download/latest/v86.wasm",
         memory_size: 32 * 1024 * 1024,
         vga_memory_size: 2 * 1024 * 1024,
         screen_container: document.getElementById("screen_container"),
