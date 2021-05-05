@@ -5,8 +5,11 @@
 <script>
 "use strict";
 
-window.onload = function()
+function loadbruh()
 {
+    var selel=document.querySelector("select"),
+        selval=selel.value;
+    selel.outerHTML=document.querySelector("button").outerHTML="";
     var emulator = window.emulator = new V86Starter({
         wasm_path: "https://github.com/copy/v86/releases/download/latest/v86.wasm",
         memory_size: 32 * 1024 * 1024,
@@ -19,12 +22,19 @@ window.onload = function()
             url: "https://github.com/copy/v86/raw/master/bios/vgabios.bin",
         },
         cdrom: {
-            url: "linux.iso",
+            url: selval,
         },
         autostart: true,
     });
 }
 </script>
+<select>
+    <option name="slax.iso">Slax</option>
+    <option name="tinycore.iso">TinyCore</option>
+    <option name="olive.iso">oLive</option>
+    <option name="tinycore-mc.iso">TinyCore with Minecraft at /mnt/sda1</option>
+</select>
+<button onclick="loadbruh()">load</button>
 <div id="screen_container">
     <div style="white-space: pre; font: 14px monospace; line-height: 14px"></div>
     <canvas style="display: none"></canvas>
