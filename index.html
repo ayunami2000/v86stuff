@@ -7,21 +7,23 @@
 <script>
 "use strict";
 
+var corsProxy="https://api.allorigins.win/raw?url=";
+
 function loadbruh(){
     var selel=document.querySelector("select"),
         selval=selel.value,
         iscustom=selval=="CUSTOM";
     selval=iscustom?prompt("Custom URL:"):selval;
     if(iscustom&&!selval)return;
-    selval="https://api.allorigins.win/raw?url="+selval;
+    selval=corsProxy+selval;
     selel.outerHTML=document.querySelector("button").outerHTML="";
     var emulator=window.emulator=new V86Starter({
-        wasm_path:"https://api.allorigins.win/raw?url=https://github.com/copy/v86/releases/download/latest/v86.wasm",
+        wasm_path:corsProxy+"https://github.com/copy/v86/releases/download/latest/v86.wasm",
         memory_size:192*1024*1024,
         vga_memory_size:8*1024*1024,
         screen_container:document.getElementById("screen_container"),
-        bios:{url:"seabios.bin"},
-        vga_bios:{url:"vgabios.bin"},
+        bios:{url:corsProxy+"https://github.com/copy/v86/raw/master/bios/seabios.bin"},
+        vga_bios:{url:corsProxy+"https://github.com/copy/v86/raw/master/bios/vgabios.bin"},
         cdrom:{url:selval},
         autostart:true
     });
